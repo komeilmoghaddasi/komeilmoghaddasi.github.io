@@ -3,69 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Intro</title>
+    <title>Komeil Moghaddasi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-        /* General page styling */
-        body, html {
+        /* General styles */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
-            height: 100%;
-            font-family: 'Courier New', Courier, monospace; /* Monospace font for a coding effect */
-            background: white;
+            line-height: 1.5;
         }
 
-        /* Intro Container */
-        #intro {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: white;
+        header {
+            background: #2C3E50;
+            color: white;
+            padding: 10px 0;
             text-align: center;
-            font-size: 24px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        #intro .fade-text {
-            opacity: 0;
-            animation: fadeIn 3s forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        #code-display {
-            display: none;
-            white-space: pre-wrap; /* Preserve formatting for HTML structure */
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
             font-size: 16px;
-            border: 1px solid #ccc;
-            padding: 20px;
-            max-width: 80%;
-            margin: 20px auto;
-            color: #333;
-            background: #f4f4f4;
-            overflow: hidden;
         }
 
-        #transition-message {
-            display: none;
-            font-size: 24px;
-            margin-top: 50px;
+        header nav a:hover {
+            text-decoration: underline;
         }
 
-        #main-content {
-            display: none;
-        }
-
-        /* Main Site Content Styling */
+        /* Container styles */
         .container {
             display: flex;
+            flex-wrap: wrap;
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 80px auto 0 auto;
             padding: 20px;
         }
+
+        /* Left column styles */
         .left-column {
             flex: 1 1 300px;
             padding: 20px;
@@ -74,6 +56,25 @@
             text-align: center;
             box-sizing: border-box;
         }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: #2C3E50;
+            margin: 0 10px;
+            font-size: 1.5em;
+        }
+
+        .social-links a:hover {
+            color: #3498DB;
+        }
+
+        /* Right column styles */
         .right-column {
             flex: 3 1 600px;
             padding: 20px;
@@ -82,105 +83,128 @@
             margin-left: 20px;
             box-sizing: border-box;
         }
-        .profile-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 20px;
+
+        /* Typing animation container */
+        .typewriter p {
+            border-right: .15em solid black;
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
+
+        footer {
+            text-align: center;
+            background: #2C3E50;
+            color: white;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-column, .right-column {
+                width: 100%;
+                margin-left: 0;
+                padding: 10px;
+            }
+
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header nav a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-photo {
+                width: 80px;
+                height: 80px;
+            }
+
+            header nav a {
+                margin: 0 5px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="intro">
-        <span class="fade-text">Everything starts from nothing</span>
-    </div>
-
-    <div id="code-display">
-        &lt;!DOCTYPE html&gt;<br>
-        &lt;html lang="en"&gt;<br>
-        &lt;head&gt;<br>
-        &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
-        &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
-        ...
-    </div>
-
-    <div id="transition-message">
-        Let it go, your time is valuable, LET'S GO!
-    </div>
-
-    <!-- Main Content -->
-    <div id="main-content">
-        <header>
-            <nav>
-                <a href="#bio">Biography</a>
-                <a href="#publications">Publications</a>
-                <a href="#conferences">Conferences</a>
-                <a href="URL_TO_YOUR_CV" target="_blank">Download CV</a>
-            </nav>
-        </header>
-        <div class="container">
-            <div class="left-column">
-                <img src="URL_TO_YOUR_PROFILE_PICTURE" alt="Komeil Moghaddasi" class="profile-photo">
-                <h2>Komeil Moghaddasi</h2>
-                <p>Information Technology Specialist</p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/komeil-moghaddasi" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" title="Google Scholar"><i class="fab fa-google"></i></a>
-                    <a href="https://www.researchgate.net/profile/Komeil-Moghaddasi" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
-                </div>
-            </div>
-            <div class="right-column">
-                <section id="bio" class="typewriter">
-                    <h2>Biography</h2>
-                    <p>Komeil Moghaddasi is a seasoned Information Technology specialist with expertise in mobile edge computing, machine learning, and blockchain technologies...</p>
-                </section>
+    <header>
+        <nav>
+            <a href="#bio">Biography</a>
+            <a href="#publications">Publications</a>
+            <a href="#conferences">Conferences</a>
+            <a href="URL_TO_YOUR_CV" target="_blank">Download CV</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="left-column">
+            <img src="URL_TO_YOUR_PROFILE_PICTURE" alt="Komeil Moghaddasi" class="profile-photo">
+            <h2>Komeil Moghaddasi</h2>
+            <p>Information Technology Specialist</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/komeil-moghaddasi" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" title="Google Scholar"><i class="fab fa-google"></i></a>
+                <a href="https://www.researchgate.net/profile/Komeil-Moghaddasi" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
             </div>
         </div>
+        <div class="right-column">
+            <section id="bio" class="typewriter">
+                <h2>Biography</h2>
+                <p id="typing-text"></p>
+            </section>
+            <section id="publications">
+                <h2>Publications</h2>
+                <ul>
+                    <li class="publication">Moghaddasi, K., et al. "An Advanced Deep Reinforcement Learning Algorithm for Three-Layer D2D-Edge-Cloud Computing Architecture for Efficient Task Offloading in the Internet of Things." <a href="https://www.sciencedirect.com/science/article/abs/pii/S2210537924000374">Sustainable Computing: Informatics and Systems</a> (2024).</li>
+                </ul>
+            </section>
+            <section id="conferences">
+                <h2>Conferences</h2>
+                <ul>
+                    <li class="conference">Moghaddasi, K., & Rajabi, S. "Double Deep Q-Learning Networks for Energy-Efficient IoT Task Offloading in D2D MEC Environments." <a href="https://ieeexplore.ieee.org/abstract/document/10365356">IoT Conference 2023</a>.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Core Skills</h2>
+                <ul class="skills-list">
+                    <li>Data Science & Machine Learning: Python, NumPy, Pandas, SciPy, Matplotlib, Scikit-learn, TensorFlow, PyTorch</li>
+                </ul>
+            </section>
+        </div>
     </div>
-
     <footer>
         <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Step 1: Display the fade-in message
-            setTimeout(() => {
-                document.querySelector(".fade-text").style.opacity = 1;
-            }, 500);
+        // JavaScript for word-by-word typing effect
+        const text = "Komeil Moghaddasi is a seasoned Information Technology specialist with expertise in mobile edge computing, machine learning, and blockchain technologies. Holding a Master of Science from Islamic Azad University, Urmia, he has contributed to several high-impact projects and publications in the field. Komeil is dedicated to advancing technology integration in practical and sustainable ways.";
+        const typingElement = document.getElementById("typing-text");
+        const words = text.split(" ");
+        let i = 0;
 
-            // Step 2: Transition to code display
-            setTimeout(() => {
-                document.getElementById("intro").style.display = "none";
-                const codeDisplay = document.getElementById("code-display");
-                codeDisplay.style.display = "block";
-                let codeText = codeDisplay.innerHTML;
-                codeDisplay.innerHTML = "";
-                let index = 0;
-
-                function typeCode() {
-                    if (index < codeText.length) {
-                        codeDisplay.innerHTML += codeText.charAt(index);
-                        index++;
-                        setTimeout(typeCode, 50); // Slower typing speed
-                    } else {
-                        showTransitionMessage();
-                    }
-                }
-                typeCode();
-            }, 3500); // After fade-in message
-
-            // Step 3: Show transition message
-            function showTransitionMessage() {
-                document.getElementById("code-display").style.display = "none";
-                const transitionMessage = document.getElementById("transition-message");
-                transitionMessage.style.display = "block";
-                setTimeout(() => {
-                    transitionMessage.style.display = "none";
-                    document.getElementById("main-content").style.display = "block";
-                }, 3000); // Show for 3 seconds
+        function typeWord() {
+            if (i < words.length) {
+                typingElement.innerHTML += words[i] + " ";
+                i++;
+                setTimeout(typeWord, 300); // Speed of typing (adjust as needed)
+            } else {
+                typingElement.style.borderRight = "none"; // Remove blinking cursor once typing is done
             }
-        });
+        }
+
+        // Start typing on page load
+        window.onload = typeWord;
     </script>
 </body>
 </html>
