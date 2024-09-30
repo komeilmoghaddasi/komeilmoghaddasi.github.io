@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komeil Moghaddasi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <style>
-        /* General styles */
+        /* General Styles */
         body {
             font-family: 'Courier New', Courier, monospace;
             background: #f4f4f4;
             color: #333;
             margin: 0;
             padding: 0;
-            line-height: 1.5;
-            overflow: hidden; /* Disable scrolling during animation */
+            overflow: hidden; /* Prevent scrolling during animation */
         }
 
         header {
@@ -40,14 +38,57 @@
             text-decoration: underline;
         }
 
-        /* Content container */
+        /* Animation Container */
+        #intro-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2C3E50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* On top of everything */
+            color: white;
+            text-align: center;
+        }
+
+        /* Complex math and code animation */
+        .complex {
+            font-size: 1.5em;
+            margin: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        /* Button */
+        .ready-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            margin-top: 30px;
+            transition: opacity 2s ease-in-out;
+            animation: fadeIn 2s 5s ease-in-out forwards;
+        }
+
+        .ready-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Main Content Hidden Initially */
         .container {
-            display: none; /* Hidden initially */
+            display: none;
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 80px auto 0 auto;
             padding: 20px;
-            visibility: hidden; /* Hidden until particles finish */
+            visibility: hidden; /* Hidden until animation ends */
         }
 
         .left-column {
@@ -103,15 +144,10 @@
             50% { border-color: black; }
         }
 
-        /* Canvas for particles */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #2C3E50;
-            z-index: 999; /* On top of everything */
+        /* Complex Math and Code Animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Footer */
@@ -163,8 +199,14 @@
 </head>
 <body>
 
-    <!-- Canvas for particle animation -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- Intro animation container -->
+    <div id="intro-container">
+        <div class="complex">$$\int e^{x^2} dx$$</div> <!-- Example of a complex equation -->
+        <div class="complex">$$f(x) = \frac{1}{1 + e^{-x}}$$ (Sigmoid Function)</div> <!-- Sigmoid Function -->
+        <div class="complex">Python Code: <br> <pre>def sigmoid(x): return 1 / (1 + np.exp(-x))</pre></div> <!-- Example Python Code -->
+        <div class="complex">$$z = e^{i\pi} + 1 = 0$$</div> <!-- Euler's identity -->
+        <button class="ready-btn" id="ready-btn">I'm Ready, Click Here</button>
+    </div>
 
     <header>
         <nav>
@@ -175,7 +217,7 @@
         </nav>
     </header>
 
-    <!-- Content container -->
+    <!-- Main content -->
     <div class="container" id="content-container">
         <div class="left-column">
             <img src="URL_TO_YOUR_PROFILE_PICTURE" alt="Komeil Moghaddasi" class="profile-photo">
@@ -217,68 +259,15 @@
         <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript to handle transition -->
     <script>
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        const numberOfParticles = 10000;
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 2;
-                this.speedY = (Math.random() - 0.5) * 2;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-            }
-            draw() {
-                ctx.fillStyle = 'white';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function handleParticles() {
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            handleParticles();
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        // Fade out particles after 4 seconds and show content
-        setTimeout(function () {
-            gsap.to('#particles-canvas', { opacity: 0, duration: 1, onComplete: function() {
-                document.getElementById('particles-canvas').style.display = 'none';
-                document.getElementById('content-container').style.display = 'flex';
-                document.getElementById('content-container').style.visibility = 'visible';
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
-            }});
-        }, 4000);
+        // When the "I'm Ready" button is clicked
+        document.getElementById('ready-btn').addEventListener('click', function() {
+            document.getElementById('intro-container').style.display = 'none'; // Hide intro animation
+            document.getElementById('content-container').style.display = 'flex'; // Show main content
+            document.getElementById('content-container').style.visibility = 'visible'; // Ensure visibility
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
     </script>
 
 </body>
