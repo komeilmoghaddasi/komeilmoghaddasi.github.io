@@ -6,9 +6,17 @@
     <title>Komeil Moghaddasi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: black }
+        }
         body {
-            font-family: 'Courier New', Courier, monospace;
-            background: #f4f4f4;
+            font-family: 'Courier New', Courier, monospace; /* Monospace font for the typewriter effect */
+            background: #f4f4f4; /* Light grey background */
             color: #333;
             margin: 0;
             padding: 0;
@@ -17,25 +25,25 @@
         .container {
             display: flex;
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 60px auto; /* Adjusted margin to accommodate fixed header */
             padding: 20px;
         }
         .left-column {
             width: 30%;
             padding: 20px;
-            background: #ffffff;
+            background: #ffffff; /* White background for the profile */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .right-column {
             width: 70%;
             padding: 20px;
-            background: #ffffff;
+            background: #ffffff; /* White background for the content */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-left: 20px;
         }
         header {
-            background: #333;
+            background: #2C3E50; /* Dark background for the header */
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -60,93 +68,27 @@
             margin-bottom: 20px;
         }
         .social-links a {
-            color: #333;
+            color: #2C3E50;
             margin: 0 10px;
             font-size: 1.5em;
         }
         .social-links a:hover {
-            color: #555;
+            color: #3498DB;
         }
         footer {
             text-align: center;
-            background: #333;
+            background: #2C3E50;
             color: white;
             padding: 10px 0;
             margin-top: 20px;
         }
-        #chatbot {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            border-radius: 10px;
+        .typewriter p {
             overflow: hidden;
-            display: none;
-        }
-        #chatbox {
-            height: 300px;
-            overflow-y: auto;
-            padding: 10px;
-            background-color: #f9f9f9;
-        }
-        #chat-input {
-            display: flex;
-        }
-        #chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-top: 1px solid #ccc;
-        }
-        #chat-input button {
-            padding: 10px;
-            border: none;
-            background-color: #2C3E50;
-            color: white;
+            border-right: .15em solid black; /* The cursor */
+            white-space: pre-wrap; /* Changed to pre-wrap to allow wrapping */
+            animation: typing 8s steps(100, end) 1s 1 normal both, blink-caret .75s step-end infinite;
         }
     </style>
-    <script>
-        function toggleChatbot() {
-            const chatbot = document.getElementById('chatbot');
-            chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function sendChat() {
-            const input = document.getElementById('user-input');
-            const chatbox = document.getElementById('chatbox');
-            if (input.value.trim() !== '') {
-                const userDiv = document.createElement('div');
-                userDiv.textContent = 'You: ' + input.value;
-                chatbox.appendChild(userDiv);
-
-                // Add response
-                const botDiv = document.createElement('div');
-                if (input.value.toLowerCase().includes("education")) {
-                    botDiv.textContent = "Komeil holds a Master of Science in Information Technology from Islamic Azad University, Urmia.";
-                } else if (input.value.toLowerCase().includes("skills")) {
-                    botDiv.textContent = "Komeil is skilled in mobile edge computing, machine learning, and blockchain technologies.";
-                } else {
-                    botDiv.textContent = "Komeil is dedicated to advancing technology integration in practical and sustainable ways.";
-                }
-                chatbox.appendChild(botDiv);
-
-                // Clear input
-                input.value = '';
-                chatbox.scrollTop = chatbox.scrollHeight;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const input = document.getElementById('user-input');
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendChat();
-                }
-            });
-        });
-    </script>
 </head>
 <body>
     <header>
@@ -167,10 +109,9 @@
                 <a href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" title="Google Scholar"><i class="fab fa-google"></i></a>
                 <a href="https://www.researchgate.net/profile/Komeil-Moghaddasi" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
             </div>
-            <button onclick="toggleChatbot()">Chat With Me!</button>
         </div>
         <div class="right-column">
-            <section id="bio">
+            <section id="bio" class="typewriter">
                 <h2>Biography</h2>
                 <p>Komeil Moghaddasi is a seasoned Information Technology specialist with expertise in mobile edge computing, machine learning, and blockchain technologies. Holding a Master of Science from Islamic Azad University, Urmia, he has contributed to several high-impact projects and publications in the field. Komeil is dedicated to advancing technology integration in practical and sustainable ways.</p>
             </section>
@@ -192,13 +133,6 @@
                     <li>Data Science & Machine Learning: Python, NumPy, Pandas, SciPy, Matplotlib, Scikit-learn, TensorFlow, PyTorch</li>
                 </ul>
             </section>
-        </div>
-    </div>
-    <div id="chatbot">
-        <div id="chatbox"></div>
-        <div id="chat-input">
-            <input type="text" id="user-input" placeholder="Ask me anything...">
-            <button onclick="sendChat()">Send</button>
         </div>
     </div>
     <footer>
