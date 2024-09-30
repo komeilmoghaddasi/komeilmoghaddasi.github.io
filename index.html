@@ -3,102 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komeil Moghaddasi</title>
+    <title>Interactive Intro</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
+        /* General page styling */
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
             height: 100%;
-            font-family: 'Courier New', Courier, monospace;
-            background: #ffffff;
-            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace; /* Monospace font for a coding effect */
+            background: white;
         }
 
-        .centered-container {
+        /* Intro Container */
+        #intro {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background: white;
             text-align: center;
-        }
-
-        .fade-in-message {
-            opacity: 0;
-            animation: fadeIn 3s forwards;
             font-size: 24px;
-        }
-
-        .typewriter-container {
-            display: none;
-            text-align: center;
-        }
-
-        .typewriter-container .typewriter {
-            display: inline-block;
             overflow: hidden;
-            white-space: nowrap;
-            border-right: .15em solid black;
-            animation: typing 10s steps(60, end) 1s 1 normal both, blink-caret .75s step-end infinite;
-            font-size: 18px;
         }
 
-        .final-message {
-            display: none;
+        #intro .fade-text {
             opacity: 0;
             animation: fadeIn 3s forwards;
-            font-size: 24px;
-            color: #333;
         }
 
-        .main-site {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #code-display {
+            display: none;
+            white-space: pre-wrap; /* Preserve formatting for HTML structure */
+            font-size: 16px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 80%;
+            margin: 20px auto;
+            color: #333;
+            background: #f4f4f4;
+            overflow: hidden;
+        }
+
+        #transition-message {
+            display: none;
+            font-size: 24px;
+            margin-top: 50px;
+        }
+
+        #main-content {
             display: none;
         }
 
-        /* Keyframes */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        /* Main Site Content Styling */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 20px;
         }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+        .left-column {
+            flex: 1 1 300px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-sizing: border-box;
         }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: black; }
+        .right-column {
+            flex: 3 1 600px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+            box-sizing: border-box;
+        }
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Initial Fade-in Message -->
-    <div class="centered-container">
-        <div id="fade-message" class="fade-in-message">Everything starts from nothing.</div>
+    <div id="intro">
+        <span class="fade-text">Everything starts from nothing</span>
     </div>
 
-    <!-- Typewriter Effect for the HTML Code -->
-    <div class="centered-container typewriter-container" id="typewriter-container">
-        <div class="typewriter">
-            &lt;!DOCTYPE html&gt;<br>
-            &lt;html lang="en"&gt;<br>
-            &lt;head&gt;<br>
-            &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
-            &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
-            &lt;/head&gt;<br>
-            &lt;body&gt;
-        </div>
+    <div id="code-display">
+        &lt;!DOCTYPE html&gt;<br>
+        &lt;html lang="en"&gt;<br>
+        &lt;head&gt;<br>
+        &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+        &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+        ...
     </div>
 
-    <!-- Final Message Before Site Loads -->
-    <div class="centered-container" id="final-message">
-        <div class="final-message">Let it go, your time is valuable, LET'S GO!</div>
+    <div id="transition-message">
+        Let it go, your time is valuable, LET'S GO!
     </div>
 
-    <!-- Main Site Content -->
-    <div class="main-site" id="main-site">
+    <!-- Main Content -->
+    <div id="main-content">
         <header>
             <nav>
                 <a href="#bio">Biography</a>
@@ -119,7 +131,7 @@
                 </div>
             </div>
             <div class="right-column">
-                <section id="bio">
+                <section id="bio" class="typewriter">
                     <h2>Biography</h2>
                     <p>Komeil Moghaddasi is a seasoned Information Technology specialist with expertise in mobile edge computing, machine learning, and blockchain technologies...</p>
                 </section>
@@ -127,24 +139,49 @@
         </div>
     </div>
 
+    <footer>
+        <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
+    </footer>
+
     <script>
-        // Show typewriter effect after the initial message
-        setTimeout(() => {
-            document.getElementById('fade-message').style.display = 'none';
-            document.getElementById('typewriter-container').style.display = 'flex';
-        }, 3000);
+        document.addEventListener("DOMContentLoaded", () => {
+            // Step 1: Display the fade-in message
+            setTimeout(() => {
+                document.querySelector(".fade-text").style.opacity = 1;
+            }, 500);
 
-        // Show the final message after typewriter animation ends
-        setTimeout(() => {
-            document.getElementById('typewriter-container').style.display = 'none';
-            document.getElementById('final-message').style.display = 'flex';
-        }, 14000);
+            // Step 2: Display the code typing animation
+            setTimeout(() => {
+                document.getElementById("intro").style.display = "none";
+                const codeDisplay = document.getElementById("code-display");
+                codeDisplay.style.display = "block";
+                let codeText = codeDisplay.innerHTML;
+                codeDisplay.innerHTML = "";
+                let index = 0;
 
-        // Show the main site content after final message
-        setTimeout(() => {
-            document.getElementById('final-message').style.display = 'none';
-            document.getElementById('main-site').style.display = 'block';
-        }, 17000);
+                function typeCode() {
+                    if (index < codeText.length) {
+                        codeDisplay.innerHTML += codeText.charAt(index);
+                        index++;
+                        setTimeout(typeCode, 20); // Adjust typing speed here
+                    } else {
+                        showTransitionMessage();
+                    }
+                }
+                typeCode();
+            }, 3500); // Adjust timing for the fade-in message
+
+            // Step 3: Show the transition message
+            function showTransitionMessage() {
+                document.getElementById("code-display").style.display = "none";
+                const transitionMessage = document.getElementById("transition-message");
+                transitionMessage.style.display = "block";
+                setTimeout(() => {
+                    transitionMessage.style.display = "none";
+                    document.getElementById("main-content").style.display = "block";
+                }, 3000); // Show the transition message for 3 seconds
+            }
+        });
     </script>
 </body>
 </html>
