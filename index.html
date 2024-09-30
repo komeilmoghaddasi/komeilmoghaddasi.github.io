@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komeil Moghaddasi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: black }
+        }
         body {
-            font-family: 'Courier New', monospace;
-            background: #f4f4f4;
+            font-family: 'Courier New', Courier, monospace; /* Monospace font for the typewriter effect */
+            background: #f4f4f4; /* Light grey background */
             color: #333;
             margin: 0;
             padding: 0;
@@ -17,24 +25,25 @@
         .container {
             display: flex;
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 60px auto; /* Adjusted margin to accommodate fixed header */
             padding: 20px;
-        }
-        .left-column, .right-column {
-            padding: 20px;
-            background: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .left-column {
             width: 30%;
+            padding: 20px;
+            background: #ffffff; /* White background for the profile */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .right-column {
             width: 70%;
+            padding: 20px;
+            background: #ffffff; /* White background for the content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-left: 20px;
         }
         header {
-            background: #2C3E50;
+            background: #2C3E50; /* Dark background for the header */
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -49,6 +58,9 @@
             text-decoration: none;
             font-size: 16px;
         }
+        header nav a:hover {
+            text-decoration: underline;
+        }
         .profile-photo {
             width: 120px;
             height: 120px;
@@ -60,6 +72,9 @@
             margin: 0 10px;
             font-size: 1.5em;
         }
+        .social-links a:hover {
+            color: #3498DB;
+        }
         footer {
             text-align: center;
             background: #2C3E50;
@@ -67,15 +82,11 @@
             padding: 10px 0;
             margin-top: 20px;
         }
-        .ai-section {
-            padding: 20px;
-            background: #e8e8e8;
-            margin-top: 20px;
-            display: none; /* Initially hidden */
-        }
-        .ai-icon {
-            color: #2C3E50;
-            font-size: 50px;
+        .typewriter p {
+            overflow: hidden;
+            border-right: .15em solid black; /* The cursor */
+            white-space: pre-wrap; /* Changed to pre-wrap to allow wrapping */
+            animation: typing 8s steps(100, end) 1s 1 normal both, blink-caret .75s step-end infinite;
         }
     </style>
 </head>
@@ -100,7 +111,7 @@
             </div>
         </div>
         <div class="right-column">
-            <section id="bio">
+            <section id="bio" class="typewriter">
                 <h2>Biography</h2>
                 <p>Komeil Moghaddasi is a seasoned Information Technology specialist with expertise in mobile edge computing, machine learning, and blockchain technologies. Holding a Master of Science from Islamic Azad University, Urmia, he has contributed to several high-impact projects and publications in the field. Komeil is dedicated to advancing technology integration in practical and sustainable ways.</p>
             </section>
@@ -125,28 +136,7 @@
         </div>
     </div>
     <footer>
-        <div class="ai-section" id="aiDescription">
-            <i class="fas fa-robot ai-icon"></i>
-            <p id="aiText">Let's explore what Machine Learning and Artificial Intelligence are!</p>
-        </div>
         <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
     </footer>
-    <script>
-        const aiDescription = document.getElementById('aiDescription');
-        const aiText = document.getElementById('aiText');
-        const fullText = "Machine Learning and Artificial Intelligence are technologies at the forefront of computational advancement. They enable machines to learn from data and make decisions with minimal human intervention. This field combines elements of computer science, mathematics, and statistics to create algorithms that can process data, learn from it, and make predictions or decisions based on the learned information.";
-
-        let i = 0;
-        function typeText() {
-            if (i < fullText.length) {
-                aiText.textContent += fullText.charAt(i);
-                i++;
-                setTimeout(typeText, 30); // Adjust typing speed
-            }
-        }
-
-        aiDescription.style.display = 'block'; // Show the section
-        typeText(); // Start typing the explanation when the page loads
-    </script>
 </body>
 </html>
