@@ -24,7 +24,6 @@
             background: white;
             text-align: center;
             font-size: 24px;
-            overflow: hidden;
         }
 
         #intro .fade-text {
@@ -150,7 +149,7 @@
                 document.querySelector(".fade-text").style.opacity = 1;
             }, 500);
 
-            // Step 2: Display the code typing animation
+            // Step 2: Transition to code display
             setTimeout(() => {
                 document.getElementById("intro").style.display = "none";
                 const codeDisplay = document.getElementById("code-display");
@@ -163,15 +162,15 @@
                     if (index < codeText.length) {
                         codeDisplay.innerHTML += codeText.charAt(index);
                         index++;
-                        setTimeout(typeCode, 20); // Adjust typing speed here
+                        setTimeout(typeCode, 50); // Slower typing speed
                     } else {
                         showTransitionMessage();
                     }
                 }
                 typeCode();
-            }, 3500); // Adjust timing for the fade-in message
+            }, 3500); // After fade-in message
 
-            // Step 3: Show the transition message
+            // Step 3: Show transition message
             function showTransitionMessage() {
                 document.getElementById("code-display").style.display = "none";
                 const transitionMessage = document.getElementById("transition-message");
@@ -179,7 +178,7 @@
                 setTimeout(() => {
                     transitionMessage.style.display = "none";
                     document.getElementById("main-content").style.display = "block";
-                }, 3000); // Show the transition message for 3 seconds
+                }, 3000); // Show for 3 seconds
             }
         });
     </script>
