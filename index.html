@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komeil Moghaddasi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         /* General styles */
         body {
@@ -14,6 +15,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.5;
+            overflow: hidden; /* Prevent scrolling during particle animation */
         }
 
         header {
@@ -40,14 +42,14 @@
 
         /* Container styles */
         .container {
-            display: flex;
+            display: none; /* Hidden initially */
             flex-wrap: wrap;
             max-width: 1200px;
-            margin: 80px auto 0 auto; /* Adjusted margin to account for fixed header */
+            margin: 80px auto 0 auto;
             padding: 20px;
+            visibility: hidden; /* Make visible after particles animation */
         }
 
-        /* Left column styles */
         .left-column {
             flex: 1 1 300px;
             padding: 20px;
@@ -74,7 +76,6 @@
             color: #3498DB;
         }
 
-        /* Right column styles */
         .right-column {
             flex: 3 1 600px;
             padding: 20px;
@@ -100,6 +101,17 @@
         @keyframes blink-caret {
             from, to { border-color: transparent; }
             50% { border-color: black; }
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #2C3E50;
+            top: 0;
+            left: 0;
+            z-index: 999;
         }
 
         /* Footer */
@@ -150,6 +162,10 @@
     </style>
 </head>
 <body>
+
+    <!-- Particle background -->
+    <div id="particles-js"></div>
+
     <header>
         <nav>
             <a href="#bio">Biography</a>
@@ -158,7 +174,9 @@
             <a href="URL_TO_YOUR_CV" target="_blank">Download CV</a>
         </nav>
     </header>
-    <div class="container">
+
+    <!-- Content container -->
+    <div class="container" id="content-container">
         <div class="left-column">
             <img src="URL_TO_YOUR_PROFILE_PICTURE" alt="Komeil Moghaddasi" class="profile-photo">
             <h2>Komeil Moghaddasi</h2>
@@ -194,8 +212,25 @@
             </section>
         </div>
     </div>
+
     <footer>
         <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
     </footer>
+
+    <!-- Particle.js configuration -->
+    <script>
+        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
+            console.log('Particles.js loaded.');
+        });
+
+        // Show content after 4 seconds
+        setTimeout(function () {
+            document.getElementById('particles-js').style.display = 'none'; // Hide particles
+            document.getElementById('content-container').style.display = 'flex'; // Show content
+            document.getElementById('content-container').style.visibility = 'visible'; // Ensure visibility
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }, 4000); // 4 seconds
+    </script>
+
 </body>
 </html>
