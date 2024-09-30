@@ -6,47 +6,18 @@
     <title>Komeil Moghaddasi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: black; }
-        }
+        /* General styles */
         body {
-            font-family: 'Courier New', Courier, monospace; /* Monospace font for the typewriter effect */
-            background: #f4f4f4; /* Light grey background */
+            font-family: 'Courier New', Courier, monospace;
+            background: #f4f4f4;
             color: #333;
             margin: 0;
             padding: 0;
             line-height: 1.5;
         }
-        .container {
-            display: flex;
-            max-width: 1200px;
-            margin: 60px auto; /* Adjusted margin to accommodate fixed header */
-            padding: 20px;
-            flex-wrap: wrap; /* Allows wrapping for smaller screens */
-        }
-        .left-column {
-            width: 30%;
-            padding: 20px;
-            background: #ffffff; /* White background for the profile */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            box-sizing: border-box; /* Ensures padding is included in width calculations */
-        }
-        .right-column {
-            width: 70%;
-            padding: 20px;
-            background: #ffffff; /* White background for the content */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-left: 20px;
-            box-sizing: border-box;
-        }
+
         header {
-            background: #2C3E50; /* Dark background for the header */
+            background: #2C3E50;
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -55,34 +26,83 @@
             top: 0;
             z-index: 1000;
         }
-        header nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+
         header nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
             font-size: 16px;
         }
+
         header nav a:hover {
             text-decoration: underline;
         }
+
+        /* Container styles */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 80px auto 0 auto; /* Adjusted margin to account for fixed header */
+            padding: 20px;
+        }
+
+        /* Left column styles */
+        .left-column {
+            flex: 1 1 300px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
         .profile-photo {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             margin-bottom: 20px;
         }
+
         .social-links a {
             color: #2C3E50;
             margin: 0 10px;
             font-size: 1.5em;
         }
+
         .social-links a:hover {
             color: #3498DB;
         }
+
+        /* Right column styles */
+        .right-column {
+            flex: 3 1 600px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Typing animation */
+        .typewriter p {
+            overflow: hidden;
+            border-right: .15em solid black;
+            white-space: pre-wrap;
+            animation: typing 8s steps(100, end) 1s 1 normal both, blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: black; }
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             background: #2C3E50;
@@ -90,36 +110,41 @@
             padding: 10px 0;
             margin-top: 20px;
         }
-        .typewriter p {
-            overflow: hidden;
-            border-right: .15em solid black; /* The cursor */
-            white-space: pre-wrap; /* Changed to pre-wrap to allow wrapping */
-            animation: typing 8s steps(100, end) 1s 1 normal both, blink-caret .75s step-end infinite;
-        }
 
-        /* Responsive design for smaller screens */
-        @media (max-width: 768px) {
+        /* Responsive design */
+        @media (max-width: 1024px) {
             .container {
-                flex-direction: column; /* Stack the columns vertically */
+                flex-direction: column;
             }
+
             .left-column, .right-column {
-                width: 100%; /* Full width for both columns */
-                margin-left: 0; /* Remove the margin for the right column */
+                width: 100%;
+                margin-left: 0;
+                padding: 10px;
             }
+
             .profile-photo {
                 width: 100px;
                 height: 100px;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             header nav a {
-                margin: 0 5px; /* Reduce margin between menu items */
-                font-size: 14px; /* Smaller font size for smaller screens */
+                margin: 0 10px;
+                font-size: 14px;
             }
+        }
+
+        @media (max-width: 480px) {
             .profile-photo {
                 width: 80px;
                 height: 80px;
+            }
+
+            header nav a {
+                margin: 0 5px;
+                font-size: 12px;
             }
         }
     </style>
