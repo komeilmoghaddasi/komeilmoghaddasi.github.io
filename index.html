@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komeil Moghaddasi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <style>
         /* General styles */
         body {
@@ -15,7 +15,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.5;
-            overflow: hidden; /* Prevent scrolling during particle animation */
+            overflow: hidden; /* Disable scrolling during animation */
         }
 
         header {
@@ -40,14 +40,14 @@
             text-decoration: underline;
         }
 
-        /* Container styles */
+        /* Content container */
         .container {
             display: none; /* Hidden initially */
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 80px auto 0 auto;
             padding: 20px;
-            visibility: hidden; /* Make visible after particles animation */
+            visibility: hidden; /* Hidden until particles finish */
         }
 
         .left-column {
@@ -103,15 +103,15 @@
             50% { border-color: black; }
         }
 
-        /* Particle Background */
-        #particles-js {
+        /* Canvas for particles */
+        #particles-canvas {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: #2C3E50;
             top: 0;
             left: 0;
-            z-index: 999;
+            width: 100%;
+            height: 100%;
+            background: #2C3E50;
+            z-index: 999; /* On top of everything */
         }
 
         /* Footer */
@@ -163,8 +163,8 @@
 </head>
 <body>
 
-    <!-- Particle background -->
-    <div id="particles-js"></div>
+    <!-- Canvas for particle animation -->
+    <canvas id="particles-canvas"></canvas>
 
     <header>
         <nav>
@@ -217,19 +217,68 @@
         <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
     </footer>
 
-    <!-- Particle.js configuration -->
     <script>
-        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
-            console.log('Particles.js loaded.');
-        });
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        const numberOfParticles = 10000;
 
-        // Show content after 4 seconds
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function handleParticles() {
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            handleParticles();
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Fade out particles after 4 seconds and show content
         setTimeout(function () {
-            document.getElementById('particles-js').style.display = 'none'; // Hide particles
-            document.getElementById('content-container').style.display = 'flex'; // Show content
-            document.getElementById('content-container').style.visibility = 'visible'; // Ensure visibility
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
-        }, 4000); // 4 seconds
+            gsap.to('#particles-canvas', { opacity: 0, duration: 1, onComplete: function() {
+                document.getElementById('particles-canvas').style.display = 'none';
+                document.getElementById('content-container').style.display = 'flex';
+                document.getElementById('content-container').style.visibility = 'visible';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }});
+        }, 4000);
     </script>
 
 </body>
