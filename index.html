@@ -43,7 +43,7 @@
             display: flex;
             flex-wrap: wrap;
             max-width: 1200px;
-            margin: 80px auto 0 auto;
+            margin: 80px auto 0 auto; /* Adjusted margin to account for fixed header */
             padding: 20px;
         }
 
@@ -86,7 +86,7 @@
 
         /* Typing animation container */
         .typewriter p {
-            border-right: .15em solid black;
+            border-right: .15em solid black; /* The cursor */
             white-space: pre-wrap;
             overflow: hidden;
         }
@@ -187,24 +187,23 @@
     </footer>
 
     <script>
-        // JavaScript for word-by-word typing effect
+        // JavaScript for letter-by-letter typing effect
         const text = "Komeil Moghaddasi is a seasoned Information Technology specialist with expertise in mobile edge computing, machine learning, and blockchain technologies. Holding a Master of Science from Islamic Azad University, Urmia, he has contributed to several high-impact projects and publications in the field. Komeil is dedicated to advancing technology integration in practical and sustainable ways.";
         const typingElement = document.getElementById("typing-text");
-        const words = text.split(" ");
         let i = 0;
 
-        function typeWord() {
-            if (i < words.length) {
-                typingElement.innerHTML += words[i] + " ";
+        function typeLetter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
                 i++;
-                setTimeout(typeWord, 300); // Speed of typing (adjust as needed)
+                setTimeout(typeLetter, 50); // Adjust typing speed here (50ms for each letter)
             } else {
-                typingElement.style.borderRight = "none"; // Remove blinking cursor once typing is done
+                typingElement.style.borderRight = "none"; // Remove blinking cursor after typing completes
             }
         }
 
         // Start typing on page load
-        window.onload = typeWord;
+        window.onload = typeLetter;
     </script>
 </body>
 </html>
