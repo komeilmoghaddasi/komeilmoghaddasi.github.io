@@ -10,7 +10,7 @@
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Komeil Moghaddasi — AI Research Dashboard" />
+  <meta property="og:title" content="Komeil Moghaddasi —  Scientific Researcher" />
   <meta property="og:description" content="Publications, conferences, citations growth, research interests." />
   <meta property="og:image" content="https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true" />
 
@@ -39,15 +39,17 @@
 
     /* Header */
     header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(12px); background:linear-gradient(90deg, rgba(15,23,42,.85), rgba(2,6,23,.6)); border-bottom:1px solid rgba(148,163,184,.15)}
-    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 18px}
+    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 18px; gap:10px}
     .brand{display:flex; align-items:center; gap:12px; font-weight:800}
-    .brand img{width:32px; height:32px; border-radius:50%; object-fit:cover; box-shadow:var(--shadow)}
+    .brand img{width:30px; height:30px; border-radius:50%; object-fit:cover; box-shadow:var(--shadow)}
     .brand span{font-family:"JetBrains Mono",monospace; font-size:14px}
-    .nav a{color:var(--text); margin:0 10px; position:relative}
+    .nav a{color:var(--text); margin:0 8px; position:relative}
     .nav a:after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); transform:scaleX(0); transform-origin:left; transition:transform .25s}
     .nav a:hover:after{transform:scaleX(1)}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:9px 12px; border-radius:999px; border:1px solid rgba(148,163,184,.2); color:var(--text)}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid rgba(148,163,184,.2); color:var(--text)}
     .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none}
+    .social a{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:10px; border:1px solid rgba(148,163,184,.25); color:var(--text); opacity:.9}
+    .social a:hover{background:rgba(148,163,184,.08)}
 
     .wrap{max-width:1100px; margin:0 auto; padding:26px 18px 70px}
 
@@ -85,8 +87,8 @@
     tbody tr{border-bottom:1px solid rgba(148,163,184,.15)}
     tbody tr:hover{background:rgba(148,163,184,.05)}
 
-    /* Chart sizing (smaller per request) */
-    .chart-wrap{height:220px;}
+    /* Chart sizing — BIG (restored) */
+    .chart-wrap{height:280px;}
     .chart-card{cursor:pointer}
     .chart-tip{position:absolute; right:10px; top:8px; font-size:11px; color:var(--muted)}
 
@@ -115,13 +117,18 @@
         <img src="https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true" alt="Komeil portrait" />
         <span>Komeil Moghaddasi</span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
+      <nav class="nav-links" aria-label="Primary" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap">
         <a href="#dashboard">Dashboard</a>
         <a href="#charts">Charts</a>
         <a href="#publications">Publications</a>
         <a href="#conferences">Conferences</a>
         <a href="#education">Education</a>
         <a class="btn" href="https://komeilmoghaddasi.github.io/Komeil-Moghaddasi-CV.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> CV</a>
+        <span class="social" style="display:inline-flex; gap:6px; margin-left:4px">
+          <a href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" target="_blank" aria-label="Google Scholar" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
+          <a href="https://www.researchgate.net/profile/Komeil-Moghaddasi" target="_blank" aria-label="ResearchGate" title="ResearchGate"><i class="fa-brands fa-researchgate"></i></a>
+          <a href="https://www.linkedin.com/in/komeil-moghaddasi" target="_blank" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </span>
       </nav>
     </div>
   </header>
@@ -132,7 +139,7 @@
       <div>
         <span class="chip"><i class="fa-solid fa-microchip"></i> AI · Edge · IoT</span>
         <h1 class="title">AI Research Dashboard</h1>
-        <p class="subtitle">I aim to create innovative methods reducing energy consumption, preserving Earth’s vitality, and ensuring our planet remains sharp, resilient, and intact.</p>
+        <p class="subtitle">Citations growth, publications by year, journals, topics, and more — in one clean, dark dashboard.</p>
         <div class="grid cols-2" style="margin-top:12px; gap:10px">
           <a class="btn primary" href="#charts" id="viewCharts"><i class="fa-solid fa-chart-line"></i> View Charts</a>
           <a class="btn" href="mailto:K.moghaddasi@ieee.org"><i class="fa-solid fa-envelope"></i> Contact</a>
@@ -166,27 +173,27 @@
       <div class="card kpi"><div class="icon"><i class="fa-solid fa-graduation-cap"></i></div><div><div class="value" id="kpi-conferences">0</div><div class="label">Conferences</div></div></div>
     </section>
 
-    <!-- CHARTS (smaller & re-animate on click) -->
+    <!-- CHARTS (BIG & re-animate on click) -->
     <section id="charts" class="grid cols-2" style="margin-top:16px">
       <div class="card reveal chart-card" data-chart="citations">
         <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
         <h2 style="margin:0 0 8px">Citations Growth (2022–2025)</h2>
-        <div class="chart-wrap"><canvas id="citationsChart" height="220" aria-label="Citations growth line chart" role="img"></canvas></div>
+        <div class="chart-wrap"><canvas id="citationsChart" height="280" aria-label="Citations growth line chart" role="img"></canvas></div>
       </div>
       <div class="card reveal chart-card" data-chart="pubsYear">
         <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
         <h2 style="margin:0 0 8px">Publications by Year</h2>
-        <div class="chart-wrap"><canvas id="pubsYearChart" height="220" aria-label="Publications by year bar chart" role="img"></canvas></div>
+        <div class="chart-wrap"><canvas id="pubsYearChart" height="280" aria-label="Publications by year bar chart" role="img"></canvas></div>
       </div>
       <div class="card reveal chart-card" data-chart="publisher">
         <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
         <h2 style="margin:0 0 8px">Journals by Publisher</h2>
-        <div class="chart-wrap"><canvas id="publisherChart" height="220" aria-label="Journals by publisher doughnut chart" role="img"></canvas></div>
+        <div class="chart-wrap"><canvas id="publisherChart" height="280" aria-label="Journals by publisher doughnut chart" role="img"></canvas></div>
       </div>
       <div class="card reveal chart-card" data-chart="radar">
         <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
         <h2 style="margin:0 0 8px">Topic Focus</h2>
-        <div class="chart-wrap"><canvas id="radarChart" height="220" aria-label="Topic focus radar chart" role="img"></canvas></div>
+        <div class="chart-wrap"><canvas id="radarChart" height="280" aria-label="Topic focus radar chart" role="img"></canvas></div>
       </div>
     </section>
 
@@ -339,7 +346,7 @@
         grid: 'rgba(148,163,184,0.15)'
       };
     }
-    function gradient(ctx, c1, c2){ const g = ctx.createLinearGradient(0,0,0,220); g.addColorStop(0,c1); g.addColorStop(1,c2); return g; }
+    function gradient(ctx, c1, c2){ const g = ctx.createLinearGradient(0,0,0,280); g.addColorStop(0,c1); g.addColorStop(1,c2); return g; }
 
     function buildCitations(){
       const ctx = $('#citationsChart').getContext('2d');
