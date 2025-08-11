@@ -1,494 +1,246 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+
+    <!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Komeil Moghaddasi — AI Research Dashboard</title>
-  <meta name="description" content="Komeil Moghaddasi (Member, IEEE) — AI/ML, Edge/Cloud, Energy-Efficient Computing. Publications, conferences, research interests, and animated charts." />
-  <meta name="theme-color" content="#0b1220" />
+    <title>Komeil Moghaddasi</title>
+	<meta name="description" content="Personam website of Komeil Moghaddasi. I’ve been a research assistant for almost four years, working on various fascinating projects in computer networks and optimization algorithms./>
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="Komeil Moghaddasi"/>
+    <meta name="Designer" content="Made with love by MYSELF">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Designer" content="Made with love by Komeil">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komeil Moghaddasi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Komeil Moghaddasi — AI Research Dashboard" />
-  <meta property="og:description" content="Publications, conferences, citations growth, research interests." />
-  <meta property="og:image" content="https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true" />
+        header {
+            background: #2C3E50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
 
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
 
-  <!-- Chart.js (for animated charts) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+        header nav a:hover {
+            text-decoration: underline;
+        }
 
-  <style>
-    :root{
-      /* DARK-ONLY THEME */
-      --bg:#0b1220; --bg-soft:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#94a3b8;
-      --accent:#60a5fa; --accent2:#a78bfa; --ring:#22d3ee; --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial; color:var(--text); background:var(--bg); line-height:1.6; overflow-x:hidden}
-    a{color:var(--accent); text-decoration:none}
+        /* Container styles */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 80px auto 0 auto; /* Adjusted margin to account for fixed header */
+            padding: 20px;
+        }
 
-    /* Neural background */
-    canvas.bg-neural{position:fixed; inset:0; z-index:-1; background:#020617}
+        /* Left column styles */
+        .left-column {
+            flex: 1 1 300px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-sizing: border-box;
+        }
 
-    /* Header */
-    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(12px); background:linear-gradient(90deg, rgba(15,23,42,.85), rgba(2,6,23,.6)); border-bottom:1px solid rgba(148,163,184,.15)}
-    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 18px; gap:10px}
-    .brand{display:flex; align-items:center; gap:12px; font-weight:800}
-    .brand img{width:30px; height:30px; border-radius:50%; object-fit:cover; box-shadow:var(--shadow)}
-    .brand span{font-family:"JetBrains Mono",monospace; font-size:14px}
-    .nav a{color:var(--text); margin:0 8px; position:relative}
-    .nav a:after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); transform:scaleX(0); transform-origin:left; transition:transform .25s}
-    .nav a:hover:after{transform:scaleX(1)}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid rgba(148,163,184,.2); color:var(--text)}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none}
-    .social a{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:10px; border:1px solid rgba(148,163,184,.25); color:var(--text); opacity:.9}
-    .social a:hover{background:rgba(148,163,184,.08)}
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
 
-    .wrap{max-width:1100px; margin:0 auto; padding:26px 18px 70px}
+        .social-links a {
+            color: #2C3E50;
+            margin: 0 10px;
+            font-size: 1.5em;
+        }
 
-    /* Hero */
-    .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; background:rgba(99,102,241,.14); border:1px solid rgba(99,102,241,.35); color:#c7d2fe; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.2px}
-    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:center}
-    .title{font-size:clamp(28px,4vw,44px); line-height:1.15; margin:6px 0 6px; font-weight:800}
-    .subtitle{font-size:clamp(15px,2.2vw,18px); color:var(--muted)}
-    /* Smaller portrait per request */
-    .portrait{justify-self:end; position:relative; width:min(200px,60vw); aspect-ratio:1/1; border-radius:50%; overflow:hidden; box-shadow:var(--shadow); border:2px solid transparent; background:linear-gradient(var(--card),var(--card)) padding-box, conic-gradient(from 180deg, var(--accent), var(--accent2), var(--ring), var(--accent)) border-box; animation:floatY 9s ease-in-out infinite}
-    .portrait img{width:100%; height:100%; object-fit:cover}
-    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        .social-links a:hover {
+            color: #3498DB;
+        }
 
-    /* Cards & grids */
-    .grid{display:grid; gap:16px}
-    .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr} .cols-3{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width: 640px){ .cols-3, .cols-2{grid-template-columns:1fr} }
+        /* Right column styles */
+        .right-column {
+            flex: 3 1 600px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+            box-sizing: border-box;
+        }
 
-    .card{background:var(--card); border:1px solid rgba(148,163,184,.18); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); position:relative; overflow:hidden}
-    .card:before{content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px; background:linear-gradient(120deg, transparent, rgba(96,165,250,.6), rgba(167,139,250,.6), transparent); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.45}
+        /* Typing animation container */
+        .typewriter p {
+            border-right: .15em solid black; /* The cursor */
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
 
-    /* KPIs */
-    .kpi{display:flex; align-items:center; gap:12px}
-    .kpi .icon{border-radius:12px; padding:10px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:white}
-    .kpi .value{font-size:26px; font-weight:900}
-    .kpi .label{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em}
+        footer {
+            text-align: center;
+            background: #2C3E50;
+            color: white;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
 
-    /* Tables */
-    table{width:100%; border-collapse:collapse}
-    th, td{padding:10px; text-align:left}
-    thead th{color:var(--muted); border-bottom:1px solid rgba(148,163,184,.25); font-size:13px}
-    tbody tr{border-bottom:1px solid rgba(148,163,184,.15)}
-    tbody tr:hover{background:rgba(148,163,184,.05)}
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
 
-    /* Chart sizing — BIG (restored) */
-    .chart-wrap{height:280px;}
-    .chart-card{cursor:pointer}
-    .chart-tip{position:absolute; right:10px; top:8px; font-size:11px; color:var(--muted)}
+            .left-column, .right-column {
+                width: 100%;
+                margin-left: 0;
+                padding: 10px;
+            }
 
-    /* Reveal */
-    .reveal{opacity:0; transform:translateY(12px); transition:.6s opacity, .6s transform}
-    .reveal.in{opacity:1; transform:translateY(0)}
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+            }
+        }
 
-    /* Footer */
-    footer{text-align:center; color:var(--muted); padding:30px 16px 60px}
+        @media (max-width: 768px) {
+            header nav a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+        }
 
-    .search{display:flex; gap:10px; align-items:center; padding:10px 12px; border:1px solid rgba(148,163,184,.25); background:var(--card); border-radius:999px}
-    .search input{all:unset; width:100%; font-size:14px}
+        @media (max-width: 480px) {
+            .profile-photo {
+                width: 80px;
+                height: 80px;
+            }
 
-    .pill{display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; border:1px solid rgba(148,163,184,.25); background:rgba(2,6,23,.4); font-size:12px; color:var(--text)}
-
-    .to-top{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s}
-    .to-top.show{opacity:1; transform:translateY(0)}
-  </style>
+            header nav a {
+                margin: 0 5px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <canvas class="bg-neural" id="neural" aria-hidden="true"></canvas>
+    <header>
+        <nav>
+            <a href="#bio">Biography</a>
+            <a href="#publications">Publications</a>
+            <a href="#conferences">Conferences</a>
+            <a href="https://komeilmoghaddasi.github.io/Komeil-Moghaddasi-CV.pdf" target="_blank">Download CV</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="left-column">
+            <img src="https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true" alt="Komeil Moghaddasi" class="profile-photo">
+            <h2>Komeil Moghaddasi</h2>
+            <p>Research Assistant</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/komeil-moghaddasi" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" title="Google Scholar"><i class="fab fa-google"></i></a>
+                <a href="https://www.researchgate.net/profile/Komeil-Moghaddasi" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            </div>
+        </div>
+        <div class="right-column">
+            <section id="bio" class="typewriter">
+                <h2>Biography</h2>
+                <p id="typing-text"></p>
+                <section id="education">
+                <h2>Education</h2>
+                    <ul>
+                        <li>
+                            <strong>Master of Science in Information Technology (E-Commerce)</strong><br>
+                            Islamic Azad University (Urmia, Iran) | Sep. 2021 - Sep. 2023<br>
+                        </li>
+                        
+                        <br>
+                
+                        <li>
+                            <strong>Bachelor of Science in Computer Engineering (Software)</strong><br>
+                            Islamic Azad University (Miandoab, Iran) | Feb. 2013 - Jan. 2019<br>
+                        </li>
+                    </ul>
+                </section>
 
-  <header>
-    <div class="nav">
-      <a class="brand" href="#top" aria-label="Home">
-        <img src="https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true" alt="Komeil portrait" />
-        <span>Komeil Moghaddasi</span>
-      </a>
-      <nav class="nav-links" aria-label="Primary" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap">
-        <a href="#dashboard">Dashboard</a>
-        <a href="#charts">Charts</a>
-        <a href="#publications">Publications</a>
-        <a href="#conferences">Conferences</a>
-        <a href="#education">Education</a>
-        <a class="btn" href="https://komeilmoghaddasi.github.io/Komeil-Moghaddasi-CV.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> CV</a>
-        <span class="social" style="display:inline-flex; gap:6px; margin-left:4px">
-          <a href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" target="_blank" aria-label="Google Scholar" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
-          <a href="https://www.researchgate.net/profile/Komeil-Moghaddasi" target="_blank" aria-label="ResearchGate" title="ResearchGate"><i class="fa-brands fa-researchgate"></i></a>
-          <a href="https://www.linkedin.com/in/komeil-moghaddasi" target="_blank" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        </span>
-      </nav>
+            </section>
+            <section id="publications">
+            <h2>Publications</h2>
+            <ul>
+                <li class="publication">Moghaddasi, K., Rajabi, S., Soleimanian Gharehchopogh, F., & Ghaffari, A. (2024). "An Advanced Deep Reinforcement Learning Algorithm for Three-Layer D2D-Edge-Cloud Computing Architecture for Efficient Task Offloading in the Internet of Things." <a href="https://www.sciencedirect.com/science/article/abs/pii/S2210537924000374">Sustainable Computing: Informatics and Systems</a> (Elsevier - IF: 3.8 - Q1).</li>
+                <br>
+                <li class="publication">Min, H., Rahmani, A., Ghaderkourehpaz, P., Moghaddasi, K., & Hosseinzadeh, M. (2024). "A Joint Optimization of Resource Allocation Management and Multi-Task Offloading in High-Mobility Vehicular Multi-Access Edge Computing Networks." <a href="https://www.sciencedirect.com/science/article/abs/pii/S1570870524002671">Ad Hoc Networks</a> (Elsevier - IF: 4.4 - Q1).</li>
+                <br>
+                <li class="publication">Moghaddasi, K., Rajabi, S., & Soleimanian Gharehchopogh, F. (2024). "Multi-Objective Secure Task Offloading Strategy for Blockchain-Enabled IoV-MEC Systems: A Double Deep Q-Network Approach." <a href="https://ieeexplore.ieee.org/abstract/document/10378647">IEEE Access</a> (IEEE - IF: 3.4 - Q1).</li>
+                <br>
+                <li class="publication">Moghaddasi, K., Rajabi, S., & Soleimanian Gharehchopogh, F. (2024). "An Enhanced Asynchronous Advantage Actor-Critic-based Algorithm for Performance Optimization in Mobile Edge Computing-enabled Internet of Vehicles Networks." <a href="https://link.springer.com/article/10.1007/s12083-024-01633-x">Peer-to-Peer Networking and Applications</a> (Springer - IF: 3.3 - Q2).</li>
+                <br>
+                <li class="publication">Moghaddasi, K., Rajabi, S., Soleimanian Gharehchopogh, F., & Hosseinzadeh, M. (2023). "An Energy-Efficient Data Offloading Strategy for 5G-enabled Vehicular Edge Computing Networks Using Double Deep Q-Network." <a href="https://link.springer.com/article/10.1007/s11277-024-10862-5">Wireless Personal Communications</a> (Springer - IF: 1.9 - Q2).</li>
+                <br>
+                <li class="publication">Moghaddasi, K., & Masdari, M. (2023). "Blockchain-driven optimization of IoT in mobile edge computing environment with deep reinforcement learning and multi-criteria decision-making techniques." <a href="https://link.springer.com/article/10.1007/s10586-023-04195-4">Cluster Computing Journal</a> (Springer - IF: 3.6 - Q1).</li>
+            </ul>
+            <section id="conferences">
+            <h2>Conferences</h2>
+            <ul>
+                <li class="conference">Moghaddasi, K., & Rajabi, S. (2023). Double Deep Q-Learning Networks for Energy-Efficient IoT Task Offloading in D2D MEC Environments. In Conference 2023 7th International Conference on Internet of Things and Applications (IoT). <a href="https://ieeexplore.ieee.org/abstract/document/10365356">link</a>.</li>
+                
+                <br>
+        
+                <li class="conference">Moghaddasi, K., & Rajabi, S. (2023). Learning at the Edge: Mobile Edge Computing and Reinforcement Learning for Enhanced Web Application Performance. In Conference 2023 9th International Conference on Web Research (ICWR). <a href="https://ieeexplore.ieee.org/abstract/document/10138952">link</a>.</li>
+                
+                <br>
+        
+                <li class="conference">Rajabi, S., & Moghaddasi, K. (2023). IoT-Driven Water Quality Management System using Deep Q-Network. In 2023 14th International Conference on Information and Knowledge Technology (IKT). <a href="https://ieeexplore.ieee.org/abstract/document/10138952">link</a>.</li>
+            </ul>
+        </section>
+        </div>
     </div>
-  </header>
+    <footer>
+        <p>© 2024 Komeil Moghaddasi. All rights reserved.</p>
+    </footer>
 
-  <main id="top" class="wrap">
-    <!-- HERO -->
-    <section class="hero" id="dashboard">
-      <div>
-        <span class="chip"><i class="fa-solid fa-microchip"></i> AI · Edge · IoT</span>
-        <h1 class="title">AI Research Dashboard</h1>
-        <p class="subtitle">Citations growth, publications by year, journals, topics, and more — in one clean, dark dashboard.</p>
-        <div class="grid cols-2" style="margin-top:12px; gap:10px">
-          <a class="btn primary" href="#charts" id="viewCharts"><i class="fa-solid fa-chart-line"></i> View Charts</a>
-          <a class="btn" href="mailto:K.moghaddasi@ieee.org"><i class="fa-solid fa-envelope"></i> Contact</a>
-        </div>
-        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
-          <span class="pill">Machine Learning</span>
-          <span class="pill">Artificial Intelligence</span>
-          <span class="pill">Cloud/Edge Computing</span>
-          <span class="pill">Energy‑Efficient Computing</span>
-          <span class="pill">Smart Vehicles</span>
-          <span class="pill">Smart Grids</span>
-        </div>
-      </div>
-      <div class="portrait" aria-hidden="true">
-        <img src="https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true" alt="" />
-      </div>
-    </section>
+    <script>
+        // JavaScript for letter-by-letter typing effect
+        const text = "Hello, I'm Komeil! I’ve been a research assistant for almost four years, working on various fascinating projects in computer networks and optimization algorithms. I completed my BSc in Computer Engineering and later pursued an MSc in Information Technology. Throughout my academic and research journey, I’ve developed a deep interest in machine learning algorithms, which have become a cornerstone of my work. My research interests lie in distributed computing, artificial intelligence (AI), and machine learning (ML), where I continuously strive to explore innovative solutions to complex problems. If you’d like to get in touch or collaborate, please feel free to contact me at K.moghaddasi@ieee.org.";
+        const typingElement = document.getElementById("typing-text");
+        let i = 0;
 
-    <!-- BIOGRAPHY -->
-    <section class="reveal" style="margin-top:18px">
-      <div class="card">
-        <h2 style="margin:0 0 8px">Biography</h2>
-        <p style="margin:0">Komeil Moghaddasi (Member, IEEE) was born in West Azerbaijan, Iran, in 1993. He received the B.Sc. degree in computer engineering, in 2019, and the M.Sc. degree in information technology from Islamic Azad University, Urmia, Iran, in 2023. Since 2021 he has been a Research Assistant, where he works on distributed computing, edge intelligence, and electric‑vehicle energy management projects in collaboration with industry partners. He has authored more than 10 peer‑reviewed articles disseminated through IEEE, Elsevier and Springer venues. His work has attracted over 216 citations with an h‑index of 9, reflecting growing impact in his working field. He is a member of the IEEE Computer and Communications Societies and of ACM. He serves as a reviewer for leading peer‑reviewed journals published by IEEE, Elsevier, and Springer.</p>
-      </div>
-    </section>
-
-    <!-- KPIs -->
-    <section class="grid cols-3" style="margin-top:18px">
-      <div class="card kpi"><div class="icon"><i class="fa-solid fa-chart-line"></i></div><div><div class="value" id="kpi-total-citations">0</div><div class="label">Total citations</div></div></div>
-      <div class="card kpi"><div class="icon"><i class="fa-solid fa-newspaper"></i></div><div><div class="value" id="kpi-publications">0</div><div class="label">Publications</div></div></div>
-      <div class="card kpi"><div class="icon"><i class="fa-solid fa-graduation-cap"></i></div><div><div class="value" id="kpi-conferences">0</div><div class="label">Conferences</div></div></div>
-    </section>
-
-    <!-- CHARTS (BIG & re-animate on click) -->
-    <section id="charts" class="grid cols-2" style="margin-top:16px">
-      <div class="card reveal chart-card" data-chart="citations">
-        <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
-        <h2 style="margin:0 0 8px">Citations Growth (2022–2025)</h2>
-        <div class="chart-wrap"><canvas id="citationsChart" height="280" aria-label="Citations growth line chart" role="img"></canvas></div>
-      </div>
-      <div class="card reveal chart-card" data-chart="pubsYear">
-        <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
-        <h2 style="margin:0 0 8px">Publications by Year</h2>
-        <div class="chart-wrap"><canvas id="pubsYearChart" height="280" aria-label="Publications by year bar chart" role="img"></canvas></div>
-      </div>
-      <div class="card reveal chart-card" data-chart="publisher">
-        <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
-        <h2 style="margin:0 0 8px">Journals by Publisher</h2>
-        <div class="chart-wrap"><canvas id="publisherChart" height="280" aria-label="Journals by publisher doughnut chart" role="img"></canvas></div>
-      </div>
-      <div class="card reveal chart-card" data-chart="radar">
-        <span class="chart-tip"><i class="fa-solid fa-rotate-right"></i> Click to replay</span>
-        <h2 style="margin:0 0 8px">Topic Focus</h2>
-        <div class="chart-wrap"><canvas id="radarChart" height="280" aria-label="Topic focus radar chart" role="img"></canvas></div>
-      </div>
-    </section>
-
-    <!-- JOURNAL NAMES (explicit list) -->
-    <section class="reveal" style="margin-top:18px">
-      <div class="card">
-        <h2 style="margin:0 0 8px">Journals I've Published In</h2>
-        <div style="display:flex; flex-wrap:wrap; gap:8px">
-          <span class="pill">Sustainable Computing: Informatics and Systems (Elsevier)</span>
-          <span class="pill">Ad Hoc Networks (Elsevier)</span>
-          <span class="pill">IEEE Access (IEEE)</span>
-          <span class="pill">Peer‑to‑Peer Networking and Applications (Springer)</span>
-          <span class="pill">Wireless Personal Communications (Springer)</span>
-          <span class="pill">Cluster Computing Journal (Springer)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- PUBLICATIONS -->
-    <section id="publications" class="reveal" style="margin-top:22px">
-      <div class="card">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-          <h2 style="margin:0">Publications</h2>
-          <label class="search" aria-label="Search publications"><i class="fa-solid fa-magnifying-glass"></i><input id="pubSearch" type="text" placeholder="Search publications…" /></label>
-        </div>
-        <div style="overflow:auto; margin-top:8px">
-          <table>
-            <thead><tr><th>Year</th><th>Title</th><th>Venue</th><th>Publisher</th><th>IF / Q</th></tr></thead>
-            <tbody id="pubTable"></tbody>
-          </table>
-        </div>
-        <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; font-size:12px; color:var(--muted)">
-          <a class="btn" href="https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en" target="_blank" rel="noopener"><i class="fa-brands fa-google"></i> Google Scholar</a>
-          <a class="btn" href="https://www.researchgate.net/profile/Komeil-Moghaddasi" target="_blank" rel="noopener"><i class="fa-brands fa-researchgate"></i> ResearchGate</a>
-          <a class="btn" href="https://www.linkedin.com/in/komeil-moghaddasi" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONFERENCES -->
-    <section id="conferences" class="reveal" style="margin-top:22px">
-      <div class="card">
-        <h2 style="margin:0 0 8px">Conferences</h2>
-        <ul id="confList" style="list-style:none; padding:0; margin:0; display:grid; gap:10px">
-          <!-- items injected -->
-        </ul>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="reveal" style="margin-top:22px">
-      <div class="card">
-        <h2 style="margin:0 0 8px">Education</h2>
-        <div style="position:relative; padding-left:24px">
-          <div style="position:absolute; left:6px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent),var(--accent2)); border-radius:2px"></div>
-          <div style="position:relative; margin:14px 0">
-            <div style="position:absolute; left:-2px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--ring); box-shadow:0 0 0 3px rgba(34,211,238,.2)"></div>
-            <div><strong>M.Sc. Information Technology (E‑Commerce)</strong></div>
-            <div style="color:var(--muted)">Islamic Azad University (Urmia, Iran) · Sep. 2021 – Sep. 2023</div>
-          </div>
-          <div style="position:relative; margin:14px 0">
-            <div style="position:absolute; left:-2px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--ring); box-shadow:0 0 0 3px rgba(34,211,238,.2)"></div>
-            <div><strong>B.Sc. Computer Engineering (Software)</strong></div>
-            <div style="color:var(--muted)">Islamic Azad University (Miandoab, Iran) · Feb. 2013 – Jan. 2019</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <a href="#top" id="toTop" class="btn to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
-
-  <footer>
-    © 2025 Komeil Moghaddasi. All rights reserved.
-  </footer>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Komeil Moghaddasi",
-    "jobTitle": "Research Assistant",
-    "email": "mailto:K.moghaddasi@ieee.org",
-    "image": "https://github.com/komeilmoghaddasi/komeilmoghaddasi.github.io/blob/main/KM.jpeg?raw=true",
-    "url": "https://komeilmoghaddasi.github.io/",
-    "sameAs": [
-      "https://www.linkedin.com/in/komeil-moghaddasi",
-      "https://scholar.google.com/citations?user=5HM0no4AAAAJ&hl=en",
-      "https://www.researchgate.net/profile/Komeil-Moghaddasi"
-    ]
-  }
-  </script>
-
-  <script>
-    // ==== DATA ====
-    const publications = [
-      { year: 2024, title: "An Advanced Deep Reinforcement Learning Algorithm for Three-Layer D2D-Edge-Cloud Computing Architecture for Efficient Task Offloading in the Internet of Things.", venue: "Sustainable Computing: Informatics and Systems", link: "https://www.sciencedirect.com/science/article/abs/pii/S2210537924000374", publisher: "Elsevier", if: 3.8, quartile: "Q1", authors: "Moghaddasi, K., Rajabi, S., Soleimanian Gharehchopogh, F., & Ghaffari, A." },
-      { year: 2024, title: "A Joint Optimization of Resource Allocation Management and Multi-Task Offloading in High-Mobility Vehicular Multi-Access Edge Computing Networks.", venue: "Ad Hoc Networks", link: "https://www.sciencedirect.com/science/article/abs/pii/S1570870524002671", publisher: "Elsevier", if: 4.4, quartile: "Q1", authors: "Min, H., Rahmani, A., Ghaderkourehpaz, P., Moghaddasi, K., & Hosseinzadeh, M." },
-      { year: 2024, title: "Multi-Objective Secure Task Offloading Strategy for Blockchain-Enabled IoV-MEC Systems: A Double Deep Q-Network Approach.", venue: "IEEE Access", link: "https://ieeexplore.ieee.org/abstract/document/10378647", publisher: "IEEE", if: 3.4, quartile: "Q1", authors: "Moghaddasi, K., Rajabi, S., & Soleimanian Gharehchopogh, F." },
-      { year: 2024, title: "An Enhanced Asynchronous Advantage Actor-Critic-based Algorithm for Performance Optimization in Mobile Edge Computing-enabled Internet of Vehicles Networks.", venue: "Peer-to-Peer Networking and Applications", link: "https://link.springer.com/article/10.1007/s12083-024-01633-x", publisher: "Springer", if: 3.3, quartile: "Q2", authors: "Moghaddasi, K., Rajabi, S., & Soleimanian Gharehchopogh, F." },
-      { year: 2023, title: "An Energy-Efficient Data Offloading Strategy for 5G-enabled Vehicular Edge Computing Networks Using Double Deep Q-Network.", venue: "Wireless Personal Communications", link: "https://link.springer.com/article/10.1007/s11277-024-10862-5", publisher: "Springer", if: 1.9, quartile: "Q2", authors: "Moghaddasi, K., Rajabi, S., Soleimanian Gharehchopogh, F., & Hosseinzadeh, M." },
-      { year: 2023, title: "Blockchain-driven optimization of IoT in mobile edge computing environment with deep reinforcement learning and multi-criteria decision-making techniques.", venue: "Cluster Computing Journal", link: "https://link.springer.com/article/10.1007/s10586-023-04195-4", publisher: "Springer", if: 3.6, quartile: "Q1", authors: "Moghaddasi, K., & Masdari, M." },
-    ];
-
-    const conferences = [
-      { year: 2023, title: "Double Deep Q-Learning Networks for Energy-Efficient IoT Task Offloading in D2D MEC Environments.", venue: "2023 7th International Conference on Internet of Things and Applications (IoT)", link: "https://ieeexplore.ieee.org/abstract/document/10365356", authors: "Moghaddasi, K., & Rajabi, S." },
-      { year: 2023, title: "Learning at the Edge: Mobile Edge Computing and Reinforcement Learning for Enhanced Web Application Performance.", venue: "2023 9th International Conference on Web Research (ICWR)", link: "https://ieeexplore.ieee.org/abstract/document/10138952", authors: "Moghaddasi, K., & Rajabi, S." },
-      { year: 2023, title: "IoT-Driven Water Quality Management System using Deep Q-Network.", venue: "2023 14th International Conference on Information and Knowledge Technology (IKT)", link: "https://ieeexplore.ieee.org/abstract/document/10138952", authors: "Rajabi, S., & Moghaddasi, K." },
-    ];
-
-    // Citations (from you)
-    const citationsSeries = [
-      { year: 2022, citations: 1 },
-      { year: 2023, citations: 4 },
-      { year: 2024, citations: 93 },
-      { year: 2025, citations: 134 },
-    ];
-
-    // ==== UTILITIES ====
-    const $ = (q, root=document) => root.querySelector(q);
-    const $$ = (q, root=document) => Array.from(root.querySelectorAll(q));
-
-    // CountUp animation
-    function countUp(el, to, duration=1100){
-      const start = performance.now();
-      function step(t){
-        const p = Math.min(1, (t - start)/duration);
-        const val = Math.round(to * (0.5 - Math.cos(Math.PI*p)/2));
-        el.textContent = val.toLocaleString();
-        if(p<1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    // Publications derived data
-    const pubsByYearMap = publications.reduce((m,p)=>{m[p.year]=(m[p.year]||0)+1; return m;}, {});
-    const pubsByYear = Object.keys(pubsByYearMap).sort().map(y=>({year:+y, count: pubsByYearMap[y]}));
-    const publishersMap = publications.reduce((m,p)=>{m[p.publisher]=(m[p.publisher]||0)+1; return m;}, {});
-    const publishers = Object.entries(publishersMap).map(([name,count])=>({name, count})).sort((a,b)=>b.count-a.count);
-
-    const totalCitations = citationsSeries.reduce((s,d)=>s+d.citations,0);
-
-    // ==== CHARTS ====
-    const chartInstances = {};
-
-    function palette(){
-      return {
-        text: getComputedStyle(document.documentElement).getPropertyValue('--text').trim(),
-        grid: 'rgba(148,163,184,0.15)'
-      };
-    }
-    function gradient(ctx, c1, c2){ const g = ctx.createLinearGradient(0,0,0,280); g.addColorStop(0,c1); g.addColorStop(1,c2); return g; }
-
-    function buildCitations(){
-      const ctx = $('#citationsChart').getContext('2d');
-      const grad = gradient(ctx, 'rgba(167,139,250,0.9)', 'rgba(34,211,238,0.25)');
-      chartInstances.citations = new Chart(ctx, {
-        type: 'line',
-        data: { labels: citationsSeries.map(d=>d.year), datasets: [{ label:'Citations', data: citationsSeries.map(d=>d.citations), borderColor: grad, backgroundColor:'rgba(96,165,250,0.18)', fill:true, tension:.35, borderWidth:3, pointRadius:3.5, pointHoverRadius:6 }] },
-        options: { animation:{ duration:1100, easing:'easeOutQuart' }, plugins:{ legend:{ labels:{ color: palette().text } }, tooltip:{ backgroundColor:'#0b1220', borderColor:'#334155', borderWidth:1 } }, scales:{ x:{ ticks:{ color: palette().text }, grid:{ color: palette().grid } }, y:{ beginAtZero:true, ticks:{ color: palette().text }, grid:{ color: 'rgba(148,163,184,0.12)' } } } }
-      });
-    }
-    function buildPubsYear(){
-      const ctx = $('#pubsYearChart').getContext('2d');
-      const colors = ['#60a5fa','#a78bfa','#34d399','#f59e0b','#f472b6','#22d3ee','#fb7185'];
-      chartInstances.pubsYear = new Chart(ctx, {
-        type: 'bar',
-        data: { labels: pubsByYear.map(d=>d.year), datasets: [{ label:'Papers', data: pubsByYear.map(d=>d.count), backgroundColor: pubsByYear.map((_,i)=>colors[i%colors.length]), borderRadius:8 }] },
-        options: { animation:{ duration:1100, easing:'easeOutQuart' }, plugins:{ legend:{ labels:{ color: palette().text } }, tooltip:{ backgroundColor:'#0b1220', borderColor:'#334155', borderWidth:1 } }, scales:{ x:{ ticks:{ color: palette().text }, grid:{ color: palette().grid } }, y:{ beginAtZero:true, ticks:{ color: palette().text, precision:0 }, grid:{ color: 'rgba(148,163,184,0.12)' } } } }
-      });
-    }
-    function buildPublisher(){
-      const ctx = $('#publisherChart').getContext('2d');
-      chartInstances.publisher = new Chart(ctx, {
-        type: 'doughnut',
-        data: { labels: publishers.map(d=>d.name), datasets: [{ data: publishers.map(d=>d.count), backgroundColor:['#34d399','#60a5fa','#a78bfa','#f59e0b','#f472b6','#22d3ee'], hoverOffset:6 }] },
-        options: { animation:{ duration:1100 }, plugins:{ legend:{ position:'bottom', labels:{ color: palette().text } }, tooltip:{ backgroundColor:'#0b1220', borderColor:'#334155', borderWidth:1 } }, cutout:'58%' }
-      });
-    }
-    function buildRadar(){
-      const ctx = $('#radarChart').getContext('2d');
-      chartInstances.radar = new Chart(ctx, {
-        type: 'radar',
-        data: { labels:['Reinforcement Learning','Mobile Edge Computing','IoV / Vehicular','Edge–Cloud / D2D','Blockchain','Optimization'], datasets:[{ label:'Focus', data:[5,5,4,4,2,5], backgroundColor:'rgba(34,211,238,0.30)', borderColor:'#22d3ee', pointBackgroundColor:'#22d3ee', borderWidth:2 }] },
-        options: { animation:{ duration:1100 }, plugins:{ legend:{ labels:{ color: palette().text } } }, scales:{ r:{ angleLines:{ color:'rgba(148,163,184,0.15)' }, grid:{ color:'rgba(148,163,184,0.12)' }, pointLabels:{ color: palette().text }, ticks:{ showLabelBackdrop:false, color: palette().text, stepSize:1, max:5, min:0 } } } }
-      });
-    }
-
-    function buildAllCharts(){
-      buildCitations(); buildPubsYear(); buildPublisher(); buildRadar();
-    }
-
-    function replayChart(kind){
-      const map = { citations: buildCitations, pubsYear: buildPubsYear, publisher: buildPublisher, radar: buildRadar };
-      const inst = chartInstances[kind]; if(inst){ try{ inst.destroy(); }catch(e){} }
-      map[kind]();
-    }
-
-    // ==== INIT DOM CONTENT ====
-    document.addEventListener('DOMContentLoaded', ()=>{
-      // KPIs
-      const totalCitations = citationsSeries.reduce((s,d)=>s+d.citations,0);
-      countUp($('#kpi-total-citations'), totalCitations);
-      countUp($('#kpi-publications'), publications.length);
-      countUp($('#kpi-conferences'), conferences.length);
-
-      // Publications table
-      const tbody = $('#pubTable');
-      function renderPubs(list){
-        tbody.innerHTML = list.map(p=>`<tr>
-          <td>${p.year}</td>
-          <td><a href="${p.link}" target="_blank" rel="noopener">${p.title}</a><div style="color:var(--muted); font-size:12px">${p.authors}</div></td>
-          <td>${p.venue}</td>
-          <td>${p.publisher}</td>
-          <td>${p.if} <span style="color:var(--muted)">/ ${p.quartile}</span></td>
-        </tr>`).join('');
-      }
-      renderPubs(publications);
-
-      $('#pubSearch').addEventListener('input', (e)=>{
-        const q = e.target.value.trim().toLowerCase();
-        const filtered = publications.filter(p => (`${p.title} ${p.venue} ${p.publisher} ${p.year} ${p.authors}`).toLowerCase().includes(q));
-        renderPubs(filtered);
-      });
-
-      // Conferences list
-      const confUL = $('#confList');
-      confUL.innerHTML = conferences.map(c => `
-        <li class="card" style="padding:12px">
-          <div style="font-size:12px; color:var(--muted)">${c.year}</div>
-          <a href="${c.link}" target="_blank" rel="noopener" style="color:var(--text)"><strong>${c.title}</strong> <i class="fa-solid fa-arrow-up-right-from-square" style="opacity:.8; font-size:12px"></i></a>
-          <div style="color:var(--muted)">${c.venue}</div>
-          <div style="color:var(--muted); font-size:12px">${c.authors}</div>
-        </li>`).join('');
-
-      // Build charts initially
-      buildAllCharts();
-
-      // Replay on click + cue button
-      $$('.chart-card').forEach(el=> el.addEventListener('click', ()=>{ replayChart(el.dataset.chart); }));
-      $('#viewCharts').addEventListener('click', (e)=>{
-        e.preventDefault(); document.querySelector('#charts').scrollIntoView({behavior:'smooth'});
-        // replay all after scroll
-        setTimeout(()=>{ Object.keys(chartInstances).forEach(k=>replayChart(k)); }, 500);
-      });
-
-      // Reveal on scroll
-      const obs = new IntersectionObserver((entries)=>{ entries.forEach(e=> e.target.classList.toggle('in', e.isIntersecting)); }, { threshold: 0.12 });
-      $$('.reveal').forEach(el=>obs.observe(el));
-
-      // Smooth in-page nav
-      $$('.nav a[href^="#"]').forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});}));
-
-      // Back to top
-      const toTop = $('#toTop');
-      window.addEventListener('scroll', ()=>{ toTop.classList.toggle('show', window.scrollY > 600); });
-    });
-
-    // ==== Neural background animation ====
-    (function(){
-      const canvas = document.getElementById('neural');
-      const ctx = canvas.getContext('2d');
-      let w, h; const DPR = Math.min(2, window.devicePixelRatio || 1);
-
-      function resize(){ w=canvas.width=innerWidth*DPR; h=canvas.height=Math.max(innerHeight, 900)*DPR; canvas.style.width=innerWidth+'px'; canvas.style.height=Math.max(innerHeight,900)+'px'; }
-      resize(); window.addEventListener('resize', resize);
-
-      const N=70;
-      const nodes = Array.from({length:N}).map(()=>({
-        x: Math.random()*w, y: Math.random()*h,
-        vx: (Math.random()-.5)*0.6*DPR, vy:(Math.random()-.5)*0.6*DPR, r:(1+Math.random()*1.8)*DPR
-      }));
-
-      function tick(){
-        ctx.clearRect(0,0,w,h);
-        // soft glow
-        const gx = w*0.6, gy = h*0.3; const grad = ctx.createRadialGradient(gx,gy,0,gx,gy,h*0.9);
-        grad.addColorStop(0,'rgba(96,165,250,0.15)'); grad.addColorStop(1,'rgba(2,6,23,0)');
-        ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
-
-        // edges
-        for(let i=0;i<N;i++){
-          const a=nodes[i]; a.x+=a.vx; a.y+=a.vy; if(a.x<0||a.x>w) a.vx*=-1; if(a.y<0||a.y>h) a.vy*=-1;
-          for(let j=i+1;j<N;j++){
-            const b=nodes[j]; const dx=a.x-b.x, dy=a.y-b.y; const d=Math.hypot(dx,dy);
-            if(d<110*DPR){ const alpha=1-d/(110*DPR); ctx.strokeStyle=`rgba(167,139,250,${alpha*0.35})`; ctx.lineWidth=1*DPR; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
-          }
+        function typeLetter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeLetter, 50); // Adjust typing speed here (50ms for each letter)
+            } else {
+                typingElement.style.borderRight = "none"; // Remove blinking cursor after typing completes
+            }
         }
-        // nodes
-        for(const n of nodes){ ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(34,211,238,0.8)'; ctx.fill(); }
-        requestAnimationFrame(tick);
-      }
-      tick();
-    })();
-  </script>
+
+        // Start typing on page load
+        window.onload = typeLetter;
+    </script>
 </body>
 </html>
