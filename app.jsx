@@ -18,8 +18,8 @@ const STACK = [
 const NOW = [
   { k: "current",   v: "Decentralised grid architectures @ QUT" },
   { k: "reading",   v: "Sutton & Barto, 2nd ed. ch. 13" },
-  { k: "compiling", v: "federated SAC over a 33-bus IEEE testbed" },
-  { k: "listening", v: "the hum of a 3090 Ti at 78°C" },
+  { k: "compiling", v: "distributed coordination architectures" },
+  { k: "listening", v: "the hum of a Tesla A100 at 78°C" },
 ];
 
 /* ─────────────────────────────────────────────────────────────── helpers */
