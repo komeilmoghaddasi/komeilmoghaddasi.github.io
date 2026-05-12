@@ -191,7 +191,7 @@ function Boot({ onDone }) {
       <div className="boot__panel">
         <div className="boot__head mono">
           <span><span className="dot dot--r" /><span className="dot dot--a" /><span className="dot dot--g" /></span>
-          <span>komeil@brisbane · zsh</span>
+          <span>komeil@mmmmmmm · zsh</span>
           <span>{new Date().toISOString().slice(0,19).replace("T"," ")}</span>
         </div>
         <div className="boot__body mono">
