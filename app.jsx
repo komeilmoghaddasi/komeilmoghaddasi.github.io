@@ -339,8 +339,8 @@ const FOCUS = [
   {
     id: "edge",
     label: "edge / vehicular",
-    title: "Task offloading that actually saves energy.",
-    body: "Federated SAC, A3C, and double-DQN schedulers for IoV / IoT-MEC. Real bandwidth, real channel models — published across Q1 venues at Elsevier and IEEE.",
+    title: "Energy-efficient edge computing.",
+    body: "Designing edge and mobile-edge systems that meet latency targets without burning the battery, smarter offloading decisions, lighter models, energy-aware scheduling, and resource allocation across IoT and vehicular networks.",
     code: [
       "obs = (cpu, batt, rssi, queue)",
       "act = SAC(obs)                # ∈ {local, edge, cloud}",
